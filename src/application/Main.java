@@ -1,5 +1,5 @@
 package application;
-	
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,8 +12,11 @@ import javafx.scene.layout.VBox;
 
 
 public class Main extends Application {
+	private Stage stage;
+	
 	@Override
 	public void start(Stage primaryStage) {
+		this.stage = primaryStage;
 		primaryStage.setScene(logInScene());
 		primaryStage.setTitle("Chat Server");
 		primaryStage.show();
@@ -35,6 +38,11 @@ public class Main extends Application {
 		VBox.setMargin(logInFld, new Insets(0, 10, 0, 10));
 		Button logInBtn = new Button("OK");
 		logInBtn.setPrefWidth(60);
+		logInBtn.setOnAction((event) -> {
+			Lobby lobby = new Lobby(logInFld.getText());
+			Scene scene = new Scene(lobby, 500, 500);
+			stage.setScene(scene);
+		});
 		root.getChildren().add(logInBtn);
 		Scene scene = new Scene(root, 400, 200);
 		return scene;
