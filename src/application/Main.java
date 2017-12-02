@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
+import room.Account;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -28,6 +29,7 @@ public class Main extends Application {
 	
 	private Scene logInScene() {
 		VBox root = new VBox(10);
+		root.setPadding(new Insets(10));
 		root.setAlignment(Pos.CENTER);
 		Label logInLbl = new Label("Enter your name");
 		root.getChildren().add(logInLbl);
@@ -35,11 +37,11 @@ public class Main extends Application {
 		logInFld.setMaxWidth(250);
 		logInFld.setAlignment(Pos.BASELINE_CENTER);
 		root.getChildren().add(logInFld);
-		VBox.setMargin(logInFld, new Insets(0, 10, 0, 10));
 		Button logInBtn = new Button("OK");
 		logInBtn.setPrefWidth(60);
 		logInBtn.setOnAction((event) -> {
-			Lobby lobby = new Lobby(logInFld.getText());
+			Account.name = logInFld.getText();
+			Lobby lobby = new Lobby(logInFld.getText(), stage);
 			Scene scene = new Scene(lobby, 500, 500);
 			stage.setScene(scene);
 		});
